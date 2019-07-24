@@ -11,8 +11,56 @@
             <TabItem Header="Guided Cantilever">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="300*"/>
+                        <ColumnDefinition Width="487*"/>
                     </Grid.ColumnDefinitions>
+                    <Label Content="Temperature" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="155"/>
+                    <Label Content="T1 - Design (°C)" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Height="27" Width="155"/>
+                    <Label Content="T2 - Amb (°C)" HorizontalAlignment="Left" Margin="10,63,0,0" VerticalAlignment="Top" Height="26" Width="155"/>
+                    <Label Content="Pipe Diameter (Inch)" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Height="26" Width="155"/>
+                    <Label Content="Change in Length (mm)" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top" Height="25" Width="155"/>
+                    <Label Content="Length (mm)" HorizontalAlignment="Left" Margin="10,201,0,0" VerticalAlignment="Top" Height="25" Width="155"/>
+                    <Label Content="Expansion Coefficient" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top" Height="25" Width="155"/>
+                    <Label Content="Change in Temp (°C)" HorizontalAlignment="Left" Margin="10,257,0,0" VerticalAlignment="Top" Height="26" Width="155"/>
+                    <Label Content="Required Leg Length (mm)" HorizontalAlignment="Left" Margin="10,313,0,0" VerticalAlignment="Top" Height="26" Width="155"/>
+                    <TextBox x:Name="tbTempDesign" HorizontalAlignment="Left" Height="23" Margin="170,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tbTempAmb" HorizontalAlignment="Left" Height="23" Margin="170,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tbLenChange" HorizontalAlignment="Left" Height="23" Margin="170,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <TextBox x:Name="tbLen" HorizontalAlignment="Left" Height="23" Margin="170,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="tbTempChange" HorizontalAlignment="Left" Height="23" Margin="170,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <TextBox x:Name="tbReqLegLen" HorizontalAlignment="Left" Height="23" Margin="170,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <ComboBox x:Name="cbPipeDia" HorizontalAlignment="Left" Margin="170,122,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionChanged="CbPipeDia_SelectionChanged">
+                        <ListBoxItem Content="1/2"/>
+                        <ListBoxItem Content="3/4"/>
+                        <ListBoxItem Content="1"/>
+                        <ListBoxItem Content="1 1/2"/>
+                        <ListBoxItem Content="2"/>
+                        <ListBoxItem Content="2 1/2"/>
+                        <ListBoxItem Content="3"/>
+                        <ListBoxItem Content="3 1/2"/>
+                        <ListBoxItem Content="4"/>
+                        <ListBoxItem Content="5"/>
+                        <ListBoxItem Content="6"/>
+                        <ListBoxItem Content="8"/>
+                        <ListBoxItem Content="10"/>
+                        <ListBoxItem Content="12"/>
+                        <ListBoxItem Content="14"/>
+                        <ListBoxItem Content="16"/>
+                        <ListBoxItem Content="18"/>
+                        <ListBoxItem Content="20"/>
+                        <ListBoxItem Content="24"/>
+                        <ListBoxItem Content="26"/>
+                        <ListBoxItem Content="30"/>
+                        <ListBoxItem Content="32"/>
+                        <ListBoxItem Content="34"/>
+                        <ListBoxItem Content="36"/>
+                    </ComboBox>
+                    <ComboBox x:Name="cbExpCoeff" HorizontalAlignment="Left" Margin="170,233,0,0" VerticalAlignment="Top" Width="120" Height="21" SelectionChanged="CbExpCoeff_SelectionChanged">
+                        <ListBoxItem Content="Carbon Steel"/>
+                        <ListBoxItem Content="Stainless Steel 304"/>
+                        <ListBoxItem Content="Stainless Steel 316"/>
+                    </ComboBox>
+                    <Button Content="Calculate" HorizontalAlignment="Left" Margin="10,344,0,0" VerticalAlignment="Top" Width="280" Height="20" Click="Button_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Deflection">
