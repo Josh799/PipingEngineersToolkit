@@ -21,10 +21,14 @@ namespace PipingEngineersToolkit
     public partial class MainWindow : Window
     {
         private double tempChangeNumber, pipeDiaNumber, reqLegLengthNumber, expCoeffNumber, lenChangeNumber;
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
         private void CbExpCoeff_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (cbExpCoeff.SelectedItem.ToString())
+            switch (cbExpCoeff.SelectedValue)
             {
                 case "Carbon Steel":
                     expCoeffNumber = 0.000012;
@@ -40,7 +44,7 @@ namespace PipingEngineersToolkit
 
         private void CbPipeDia_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (cbPipeDia.SelectedItem.ToString())
+            switch (cbPipeDia.SelectedValue)
             {
                 case "1/2":
                     pipeDiaNumber = 21.3;
@@ -115,11 +119,6 @@ namespace PipingEngineersToolkit
                     pipeDiaNumber = 914;
                     break;
             }
-        }
-
-        public MainWindow()
-        {
-            InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

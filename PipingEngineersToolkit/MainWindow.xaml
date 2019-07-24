@@ -11,8 +11,7 @@
             <TabItem Header="Guided Cantilever">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="300*"/>
-                        <ColumnDefinition Width="487*"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Temperature" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="155"/>
                     <Label Content="T1 - Design (°C)" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Height="27" Width="155"/>
@@ -29,44 +28,84 @@
                     <TextBox x:Name="tbLen" HorizontalAlignment="Left" Height="23" Margin="170,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <TextBox x:Name="tbTempChange" HorizontalAlignment="Left" Height="23" Margin="170,261,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
                     <TextBox x:Name="tbReqLegLen" HorizontalAlignment="Left" Height="23" Margin="170,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <ComboBox x:Name="cbPipeDia" HorizontalAlignment="Left" Margin="170,122,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionChanged="CbPipeDia_SelectionChanged">
-                        <ListBoxItem Content="1/2"/>
-                        <ListBoxItem Content="3/4"/>
-                        <ListBoxItem Content="1"/>
-                        <ListBoxItem Content="1 1/2"/>
-                        <ListBoxItem Content="2"/>
-                        <ListBoxItem Content="2 1/2"/>
-                        <ListBoxItem Content="3"/>
-                        <ListBoxItem Content="3 1/2"/>
-                        <ListBoxItem Content="4"/>
-                        <ListBoxItem Content="5"/>
-                        <ListBoxItem Content="6"/>
-                        <ListBoxItem Content="8"/>
-                        <ListBoxItem Content="10"/>
-                        <ListBoxItem Content="12"/>
-                        <ListBoxItem Content="14"/>
-                        <ListBoxItem Content="16"/>
-                        <ListBoxItem Content="18"/>
-                        <ListBoxItem Content="20"/>
-                        <ListBoxItem Content="24"/>
-                        <ListBoxItem Content="26"/>
-                        <ListBoxItem Content="30"/>
-                        <ListBoxItem Content="32"/>
-                        <ListBoxItem Content="34"/>
-                        <ListBoxItem Content="36"/>
+                    <ComboBox x:Name="cbPipeDia" HorizontalAlignment="Left" Margin="170,122,0,0" VerticalAlignment="Top" Width="120" Height="23" SelectionChanged="CbPipeDia_SelectionChanged" SelectedValuePath="Content">
+                        <ComboBoxItem Content="1/2"/>
+                        <ComboBoxItem Content="3/4"/>
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="1 1/2"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="2 1/2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="3 1/2"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                        <ComboBoxItem Content="6"/>
+                        <ComboBoxItem Content="8"/>
+                        <ComboBoxItem Content="10"/>
+                        <ComboBoxItem Content="12"/>
+                        <ComboBoxItem Content="14"/>
+                        <ComboBoxItem Content="16"/>
+                        <ComboBoxItem Content="18"/>
+                        <ComboBoxItem Content="20"/>
+                        <ComboBoxItem Content="24"/>
+                        <ComboBoxItem Content="26"/>
+                        <ComboBoxItem Content="30"/>
+                        <ComboBoxItem Content="32"/>
+                        <ComboBoxItem Content="34"/>
+                        <ComboBoxItem Content="36"/>
                     </ComboBox>
-                    <ComboBox x:Name="cbExpCoeff" HorizontalAlignment="Left" Margin="170,233,0,0" VerticalAlignment="Top" Width="120" Height="21" SelectionChanged="CbExpCoeff_SelectionChanged">
-                        <ListBoxItem Content="Carbon Steel"/>
-                        <ListBoxItem Content="Stainless Steel 304"/>
-                        <ListBoxItem Content="Stainless Steel 316"/>
+                    <ComboBox x:Name="cbExpCoeff" HorizontalAlignment="Left" Margin="170,233,0,0" VerticalAlignment="Top" Width="120" Height="21" SelectionChanged="CbExpCoeff_SelectionChanged" SelectedValuePath="Content">
+                        <ComboBoxItem Content="Carbon Steel"/>
+                        <ComboBoxItem Content="Stainless Steel 304"/>
+                        <ComboBoxItem Content="Stainless Steel 316"/>
                     </ComboBox>
-                    <Button Content="Calculate" HorizontalAlignment="Left" Margin="10,344,0,0" VerticalAlignment="Top" Width="280" Height="20" Click="Button_Click"/>
+                    <Button Content="Calculate" HorizontalAlignment="Left" Margin="10,345,0,0" VerticalAlignment="Top" Width="280" Height="20" Click="Button_Click"/>
+                    <Grid HorizontalAlignment="Left" Height="373" Margin="295,10,0,0" VerticalAlignment="Top" Width="482">
+                        <Viewport3D Name="renderGuidedCantilever">
+                            <Viewport3D.Camera>
+                                <PerspectiveCamera x:Name="camMain" Position="6 5 4" LookDirection="-6 -5 -4"/>
+                            </Viewport3D.Camera>
+                            <ModelVisual3D>
+                                <ModelVisual3D.Content>
+                                    <DirectionalLight x:Name="dirLightMain" Direction="-1, -1, -1"/>
+                                </ModelVisual3D.Content>
+                            </ModelVisual3D>
+                            <ModelVisual3D x:Name="MyModel">
+                                <ModelVisual3D.Content>
+                                    <GeometryModel3D>
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D x:Name="meshMain"
+                                                            Positions="0 0 0  1 0 0  0 1 0  1 1 0  0 0 1  1 0 1  0 1 1  0 1 1"
+                                                            TriangleIndices="2 3 1  3 1 0  7 1 3  7 5 1  6 5 7  6 4 5  6 2 0
+                                                            2 0 4  2 7 3  2 6 7  0 1 5  0 5 4"/>
+                                        </GeometryModel3D.Geometry>
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial x:Name="matDiffuseMain">
+                                                <DiffuseMaterial.Brush>
+                                                    <SolidColorBrush Color="Red"/>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
+                                    </GeometryModel3D>
+                                </ModelVisual3D.Content>
+                                <ModelVisual3D.Transform>
+                                    <RotateTransform3D>
+                                        <RotateTransform3D.Rotation>
+                                            <AxisAngleRotation3D x:Name="rotate" Axis="1 1 1"/>
+                                        </RotateTransform3D.Rotation>
+                                    </RotateTransform3D>
+                                </ModelVisual3D.Transform>
+                            </ModelVisual3D>
+                        </Viewport3D>
+
+                        <Slider Height="23" HorizontalAlignment="Left" Margin="108,276,0,0" Name="slider1" VerticalAlignment="Center"
+                                Width="269" Maximum="360" Value="{Binding ElementName=rotate, Path=Angle}"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Deflection">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
-
     </Grid>
 </Window>
