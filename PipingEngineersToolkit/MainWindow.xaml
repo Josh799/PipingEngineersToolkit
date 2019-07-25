@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ht="http://helix-toolkit.org/wpf"
         xmlns:local="clr-namespace:PipingEngineersToolkit"
         mc:Ignorable="d"
         Title="Piping Engineer's Toolkit" Height="450" Width="800" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" MinWidth="800" MinHeight="450">
     <TabControl HorizontalAlignment="Stretch" Margin="0,0,0.333,-0.333" Padding="0" HorizontalContentAlignment="Stretch" MinWidth="793" MinHeight="421" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-        <TabItem Header="Guided Cantilever" Margin="-2,2,-2,0" Padding="6,2">
+        <!-- Start of Guided Cantilever Tab -->
+        <TabItem x:Name="tiGuidedCantilever" Header="Guided Cantilever" Margin="-2,2,-2,0" Padding="6,2">
             <Grid Background="#FFE5E5E5" Margin="0">
                 <Grid MinWidth="300" MinHeight="397" Margin="0,0,490,0">
                     <Label Content="Temperature" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="25" Width="155"/>
@@ -56,108 +58,21 @@
                         <ComboBoxItem Content="Stainless Steel 304"/>
                         <ComboBoxItem Content="Stainless Steel 316"/>
                     </ComboBox>
-                    <Button Content="Calculate" HorizontalAlignment="Left" Margin="10,352,0,0" VerticalAlignment="Top" Width="280" Height="25" Click="Button_Click"/>
+                    <Button x:Name="Calculate" Content="Calculate" HorizontalAlignment="Left" Margin="10,352,0,0" VerticalAlignment="Top" Width="155" Height="25" Click="Calculate_Click">
+                        <Button.ContextMenu>
+                            <ContextMenu/>
+                        </Button.ContextMenu>
+                    </Button>
+                    <Button x:Name="Clear" Content="Clear" HorizontalAlignment="Left" Margin="170,352,0,0" VerticalAlignment="Top" Width="120" Height="25" Click="Clear_Click"/>
                 </Grid>
                 <!-- End of calculations -->
+
                 <Grid Margin="305,10,10,10" MinWidth="482" MinHeight="373">
                     <Border BorderBrush="Black" BorderThickness="2" Margin="0,0,10,10">
-                        <Grid Margin="10">
-                            <!-- The Viewport3D provides a rendering surface for 3-D visual content. -->
-                            <Viewport3D Name="MyAnimatedObject"
-          ClipToBounds="True" Width="150" Height="150"
-          Canvas.Left="0" Canvas.Top="10">
-
-                                <!-- Defines the camera used to view the 3D object. -->
-                                <Viewport3D.Camera>
-                                    <PerspectiveCamera x:Name="myPerspectiveCamera" Position="0,0,2" LookDirection="0,0,-1" 
-             FieldOfView="60" />
-                                </Viewport3D.Camera>
-
-                                <!-- The ModelVisual3D children contain the 3D models -->
-                                <Viewport3D.Children>
-
-                                    <!-- Two ModelVisual3D define the lights cast in the scene. Without light, the
-                 3D object cannot be seen. Also, the direction of the lights affect shadowing. -->
-                                    <ModelVisual3D>
-                                        <ModelVisual3D.Content>
-                                            <DirectionalLight Color="#FFFFFF" Direction="-0.612372,-0.5,-0.612372" />
-                                        </ModelVisual3D.Content>
-                                    </ModelVisual3D>
-                                    <ModelVisual3D>
-                                        <ModelVisual3D.Content>
-                                            <DirectionalLight Color="#FFFFFF" Direction="0.612372,-0.5,-0.612372" />
-                                        </ModelVisual3D.Content>
-                                    </ModelVisual3D>
-                                    <ModelVisual3D>
-                                        <ModelVisual3D.Content>
-                                            <GeometryModel3D>
-
-                                                <!-- The geometry specifes the shape of the 3D plane. In this case, a flat sheet is created. -->
-                                                <GeometryModel3D.Geometry>
-                                                    <MeshGeometry3D
-                     TriangleIndices="0,1,2 3,4,5 "
-                     Normals="0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 0,0,1 "
-                     TextureCoordinates="0,0 1,0 1,1 1,1 0,1 0,0 "
-                     Positions="-0.5,-0.5,0.5 0.5,-0.5,0.5 0.5,0.5,0.5 0.5,0.5,0.5 -0.5,0.5,0.5 -0.5,-0.5,0.5 " />
-                                                </GeometryModel3D.Geometry>
-
-                                                <!-- The material specifies the material applied to the plane. In this case it is a linear gradient.-->
-                                                <GeometryModel3D.Material>
-                                                    <MaterialGroup>
-                                                        <DiffuseMaterial>
-                                                            <DiffuseMaterial.Brush>
-                                                                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                                                                    <LinearGradientBrush.GradientStops>
-                                                                        <GradientStop Color="Yellow" Offset="0" />
-                                                                        <GradientStop Color="Red" Offset="0.25" />
-                                                                        <GradientStop Color="Blue" Offset="0.75" />
-                                                                        <GradientStop Color="LimeGreen" Offset="1" />
-                                                                    </LinearGradientBrush.GradientStops>
-                                                                </LinearGradientBrush>
-                                                            </DiffuseMaterial.Brush>
-                                                        </DiffuseMaterial>
-                                                    </MaterialGroup>
-                                                </GeometryModel3D.Material>
-
-                                                <!-- The Transform specifies how to transform the 3D object. The properties of the
-                        Rotation object are animated causing the 3D object to rotate and "wobble" (see Storyboard below).-->
-                                                <GeometryModel3D.Transform>
-                                                    <RotateTransform3D>
-                                                        <RotateTransform3D.Rotation>
-                                                            <AxisAngleRotation3D x:Name="myAngleRotation" Axis="0,3,0" Angle="40" />
-                                                        </RotateTransform3D.Rotation>
-                                                    </RotateTransform3D>
-                                                </GeometryModel3D.Transform>
-                                            </GeometryModel3D>
-                                        </ModelVisual3D.Content>
-                                    </ModelVisual3D>
-                                </Viewport3D.Children>
-
-                                <!-- Trigger the rotation animation when the 3D object loads. -->
-                                <Viewport3D.Triggers>
-                                    <EventTrigger RoutedEvent="Viewport3D.Loaded">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-
-                                                <!-- This animation animates the Angle property of the AxisAngleRotation3D
-                       making the 3D object rotate from -60 degrees to 60 degrees. -->
-                                                <DoubleAnimation 
-                   Storyboard.TargetName="myAngleRotation" 
-                   Storyboard.TargetProperty="Angle" 
-                   From="-60" To="60" Duration="0:0:4" AutoReverse="True"  RepeatBehavior="Forever"/>
-
-                                                <!-- This animation animates the Axis property of the AxisAngleRotation3D
-                       making the 3D wobble as it rotates. -->
-                                                <Vector3DAnimation 
-                   Storyboard.TargetName="myAngleRotation" 
-                   Storyboard.TargetProperty="Axis" 
-                   From="0,3,0" To="1,0,1" Duration="0:0:4" AutoReverse="True"  RepeatBehavior="Forever"/>
-
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </Viewport3D.Triggers>
-                            </Viewport3D>
+                        <Grid>
+                            <ht:HelixViewport3D x:Name="MainViewPort" ZoomExtentsWhenLoaded="True">
+                                <ht:SunLight/>
+                            </ht:HelixViewport3D>
                         </Grid>
                     </Border>
                 </Grid>
@@ -165,6 +80,9 @@
             </Grid>
             <!-- End of full grid -->
         </TabItem>
+        <!-- End of GuidedCantilever Tab -->
+
+        <!-- Start of Deflection Tab -->
         <TabItem Header="Deflection" Padding="6,2" Margin="-2,2,-2,0">
             <Grid Background="#FFE5E5E5"/>
         </TabItem>
